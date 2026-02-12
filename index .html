@@ -1,0 +1,303 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>Forever ❤️</title>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  
+<style>  
+body {  
+  margin: 0;  
+  height: 100vh;  
+  background: radial-gradient(circle at top, #ffdde1, #ee9ca7);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-family: "Playfair Display", Georgia, serif;  
+  color: #5a0c2d;  
+  overflow: hidden;  
+  transition: background 4s ease;  
+}  
+  
+body.dim {  
+  background: radial-gradient(circle at top, #1a0710, #000);  
+}  
+  
+#card {  
+  background: rgba(255,255,255,0.96);  
+  padding: 28px;  
+  border-radius: 26px;  
+  max-width: 390px;  
+  width: 90%;  
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);  
+  text-align: center;  
+  position: relative;  
+}  
+  
+/* Floating hearts */  
+.heart {  
+  position: fixed;  
+  bottom: -20px;  
+  font-size: 18px;  
+  animation: floatUp 9s linear infinite;  
+  opacity: 0.7;  
+  pointer-events: none;  
+}  
+@keyframes floatUp {  
+  from { transform: translateY(0); opacity: 0; }  
+  20% { opacity: 0.7; }  
+  to { transform: translateY(-110vh); opacity: 0; }  
+}  
+  
+/* Buttons */  
+button {  
+  padding: 12px 26px;  
+  font-size: 17px;  
+  border-radius: 30px;  
+  border: none;  
+  cursor: pointer;  
+  background: linear-gradient(135deg, #c2185b, #ff4d79);  
+  color: white;  
+}  
+  
+#noBtn {  
+  position: absolute;  
+  background: #777;  
+  transition: all 0.25s ease;  
+}  
+  
+/* Typewriter */  
+#typedText {  
+  font-size: 15.5px;  
+  line-height: 1.9;  
+  white-space: pre-line;  
+}  
+.cursor {  
+  animation: blink 1s infinite;  
+}  
+@keyframes blink {  
+  0%,50% {opacity:1;}  
+  51%,100% {opacity:0;}  
+}  
+  
+/* Teddy hug */  
+#teddyWrap {  
+  display: none;  
+  margin-top: 25px;  
+  animation: fadeUp 3s forwards;  
+}  
+@keyframes fadeUp {  
+  from {opacity:0; transform:translateY(12px);}  
+  to {opacity:1; transform:translateY(0);}  
+}  
+  
+.heartbeat {  
+  animation: heartbeat 1.4s infinite;  
+}  
+@keyframes heartbeat {  
+  0% {transform: scale(1);}  
+  12% {transform: scale(1.15);}  
+  25% {transform: scale(1);}  
+  38% {transform: scale(1.08);}  
+  50% {transform: scale(1);}  
+}  
+  
+/* Killer line */  
+#killer {  
+  display: none;  
+  margin-top: 20px;  
+  font-size: 18px;  
+  font-style: italic;  
+  opacity: 0;  
+  animation: fadeFinal 3s forwards;  
+}  
+@keyframes fadeFinal {  
+  from {opacity:0;}  
+  to {opacity:1;}  
+}  
+  
+/* FOREVER SCENE */  
+#forever {  
+  position: fixed;  
+  inset: 0;  
+  background: radial-gradient(circle at top, #0a0a14, #000);  
+  color: #fff;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  text-align: center;  
+  opacity: 0;  
+  pointer-events: none;  
+  transition: opacity 5s ease;  
+  z-index: 10;  
+}  
+  
+#forever.show {  
+  opacity: 1;  
+  pointer-events: all;  
+}  
+  
+#foreverText {  
+  animation: foreverFade 6s ease forwards;  
+}  
+  
+@keyframes foreverFade {  
+  from {opacity:0; transform:translateY(10px);}  
+  to {opacity:1; transform:translateY(0);}  
+}  
+  
+/* Stars */  
+.star {  
+  position: absolute;  
+  width: 2px;  
+  height: 2px;  
+  background: white;  
+  border-radius: 50%;  
+  opacity: 0.8;  
+}  
+</style>  
+</head>  
+  
+<body>  
+  
+<script>  
+/* Floating hearts */  
+for (let i = 0; i < 22; i++) {  
+  const h = document.createElement("div");  
+  h.className = "heart";  
+  h.innerHTML = "❤️";  
+  h.style.left = Math.random() * 100 + "vw";  
+  h.style.fontSize = 14 + Math.random() * 20 + "px";  
+  h.style.animationDelay = Math.random() * 8 + "s";  
+  document.body.appendChild(h);  
+}  
+</script>  
+  
+<div id="card">  
+  <h2>Asif ❤️</h2>  
+  <p>Miles apart… but my heart never learned that rule.</p>  
+  
+  <div style="position:relative;height:90px;">  
+    <button onclick="sayYes()">Yes 💖</button>  
+    <button id="noBtn">No 🙈</button>  
+  </div>  
+</div>  
+  
+<audio id="loveSong" preload="auto">  
+  <source src="song.mp3" type="audio/mpeg">  
+</audio>  
+  
+<div id="forever">  
+  <div id="foreverText">  
+    <h1>This isn’t a moment.</h1>  
+    <h2>This is forever.</h2>  
+    <p style="margin-top:20px;font-size:18px;">  
+      Asif ❤️ Nafisa  
+    </p>  
+    <p style="font-size:26px;">∞</p>  
+  </div>  
+</div>  
+  
+<script>  
+/* No button */  
+const noBtn = document.getElementById("noBtn");  
+let escapes = 0;  
+const noTexts = ["No 🙈", "Hey 😅", "Wait 😳", "Stop 😂", "Okay okay…"];  
+  
+function moveNo() {  
+  escapes++;  
+  if (escapes <= noTexts.length) noBtn.innerText = noTexts[escapes - 1];  
+  noBtn.style.left = Math.random() * 220 + "px";  
+  noBtn.style.top = Math.random() * 50 + "px";  
+  if (escapes >= 5) noBtn.style.display = "none";  
+}  
+noBtn.onmouseenter = moveNo;  
+noBtn.ontouchstart = moveNo;  
+  
+/* YES */  
+function sayYes() {  
+  document.body.classList.add("dim");  
+  
+  const song = document.getElementById("loveSong");  
+  song.volume = 0.75;  
+  song.play().catch(()=>{});  
+  
+  document.getElementById("card").innerHTML = `  
+    <div id="typedText"></div><span class="cursor">▍</span>  
+  
+    <div id="teddyWrap">  
+      <svg width="240" height="160" viewBox="0 0 240 160" class="heartbeat">  
+        <circle cx="80" cy="80" r="36" fill="#c89b6d"/>  
+        <circle cx="160" cy="80" r="36" fill="#c89b6d"/>  
+        <circle cx="70" cy="70" r="6"/>  
+        <circle cx="90" cy="70" r="6"/>  
+        <circle cx="150" cy="70" r="6"/>  
+        <circle cx="170" cy="70" r="6"/>  
+        <path d="M95 98 Q80 112 65 98" stroke="#000" fill="none"/>  
+        <path d="M175 98 Q160 112 145 98" stroke="#000" fill="none"/>  
+        <text x="110" y="138" font-size="22">❤️</text>  
+      </svg>  
+      <div style="font-style:italic;opacity:0.8;">  
+        Even from miles away… this is how I hold you.  
+      </div>  
+    </div>  
+  
+    <div id="killer">  
+      If love had a home… it would be wherever you are.  
+    </div>  
+  
+    <p style="margin-top:16px;font-weight:bold;">— Nafisa</p>  
+  `;  
+  
+  const text = `  
+Asif,  
+  
+Loving you from a distance  
+has only made my feelings louder.  
+  
+I miss you in quiet moments,  
+in busy days,  
+in every heartbeat that whispers your name.  
+  
+You are not just someone I love —  
+you are someone my soul reaches for.  
+  
+No matter how far,  
+my heart chooses you.  
+Every time.  
+`;  
+  
+  let i = 0;  
+  const el = document.getElementById("typedText");  
+  
+  function type() {  
+    if (i < text.length) {  
+      el.innerHTML += text.charAt(i++);  
+      setTimeout(type, 55);  
+    } else {  
+      document.querySelector(".cursor").style.display = "none";  
+      setTimeout(()=>document.getElementById("teddyWrap").style.display="block",1200);  
+      setTimeout(()=>document.getElementById("killer").style.display="block",4200);  
+      setTimeout(showForever, 9000);  
+    }  
+  }  
+  type();  
+}  
+  
+/* Forever scene */  
+function showForever() {  
+  const f = document.getElementById("forever");  
+  f.classList.add("show");  
+  
+  for (let i = 0; i < 120; i++) {  
+    const s = document.createElement("div");  
+    s.className = "star";  
+    s.style.left = Math.random() * 100 + "vw";  
+    s.style.top = Math.random() * 100 + "vh";  
+    f.appendChild(s);  
+  }  
+}  
+</script>  
+  
+</body>  
+</html>  
